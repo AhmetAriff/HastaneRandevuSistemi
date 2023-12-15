@@ -21,5 +21,7 @@ namespace WebApplication7.Models
         public Doctor doctor { get; set; }
 
         public DateTime appointmentDate { get; set; }
+
+        public bool isBooked {  get; set; }
     }
 }
