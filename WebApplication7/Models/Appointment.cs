@@ -15,7 +15,7 @@ namespace WebApplication7.Models
         [ForeignKey("doctor")]
         public int doctorID { get; set; }
 
-        public IdentityUser? user { get; set; }
+        public AppUser user { get; set; }
 
         [Required]
         public Doctor doctor { get; set; }

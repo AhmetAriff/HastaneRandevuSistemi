@@ -5,7 +5,7 @@ using WebApplication7.Models;
 
 namespace WebApplication7.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
 
         public DbSet<Doctor> Doctors { get; set; }
