@@ -30,8 +30,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.user.Id)
+             <td>@{
+                        if(item.userID == null)
+                        {
+                            <h5>boş</h5>
+                        }
+                        
+                        else{
+                            @Html.DisplayFor(modelItem => item.user.firstName)
+                        }
+                }   
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.doctor.firstName)
@@ -40,7 +48,17 @@
                 @Html.DisplayFor(modelItem => item.appointmentDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isBooked)
+
+                    @{
+                        if(item.isBooked== false)
+                        {
+                            <h5>rezerve edilmedi</h5>
+                        }
+                        else
+                        {
+                            <h1>rezerve</h1>
+                        }
+                    }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.appointmentID">Edit</a> |
