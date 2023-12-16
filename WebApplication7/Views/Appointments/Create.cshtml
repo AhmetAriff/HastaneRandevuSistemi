@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Create";
 }
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <h1>Create</h1>
 
@@ -14,14 +16,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="clinicId" class="control-label"></label>
-                <select asp-for="clinicId" class="form-control" asp-items="ViewBag.Clinics">
+                <select asp-for="clinicId" id="clinicId" class="form-control" asp-items="ViewBag.Clinics">
                     <option disabled selected>---- Klinik Seçiniz ----</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </div class="form-group">
                 <label asp-for="doctorID" class="control-label"></label>
-                <select asp-for="doctorID" class="form-control" id="doctorId"></select>
-            </div>
+                <select asp-for="doctorID" class="form-select" id="doctorId"></select>
             <div class="form-group">
                 <label asp-for="appointmentDate" class="control-label"></label>
                 <input asp-for="appointmentDate" class="form-control" />
@@ -39,32 +39,32 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+
     <script>
         $(document).ready(function () {
             GetDoctorsByClinicId();
-        });
 
-        $("#clinicId").change(function () {
-            GetDoctorsByClinicId();
+            $("#clinicId").change(function () {
+                GetDoctorsByClinicId();
+            });
         });
 
         var GetDoctorsByClinicId = function () {
             $.ajax({
-                url: '@Url.Action("GetDoctorsByClinicId","Appointments")',
+                url: '@Url.Action("GetDoctorsByClinicId", "Appointments")',
                 type: 'GET',
                 data: {
                     clinicId: $('#clinicId').val()
                 },
                 success: function (data) {
-                    $('#doctorId').empty(); // Clear existing options
+                    $('#doctorId').empty(); // Önce mevcut seçenekleri temizle
                     $(data).each(function (index, item) {
-                        $('#doctorId').append('<option value="' + item.doctorID + '">' + item.doctorName + '</option>');
+                        $('#doctorId').append('<option value="' + item.doctorId + '">' + item.firstName + " " + item.lastName + '</option>');
                     });
                 }
             });
         };
     </script>
+
 }
+
