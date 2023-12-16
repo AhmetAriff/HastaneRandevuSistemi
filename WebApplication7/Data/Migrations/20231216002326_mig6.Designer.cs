@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication7.Data;
 
@@ -11,9 +12,10 @@ using WebApplication7.Data;
 namespace WebApplication7.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231216002326_mig6")]
+    partial class mig6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,16 +172,14 @@ namespace WebApplication7.Data.Migrations
                     b.Property<DateTime>("appointmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("clinicId")
-                        .HasColumnType("int");
-
                     b.Property<int>("doctorID")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("isBooked")
+                    b.Property<bool>("isBooked")
                         .HasColumnType("bit");
 
                     b.Property<string>("userID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("appointmentID");
@@ -366,7 +366,9 @@ namespace WebApplication7.Data.Migrations
 
                     b.HasOne("WebApplication7.Models.AppUser", "user")
                         .WithMany()
-                        .HasForeignKey("userID");
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("doctor");
 

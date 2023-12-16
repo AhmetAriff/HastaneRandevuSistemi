@@ -13,22 +13,19 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="userID" class="control-label"></label>
-                <select asp-for="userID" class ="form-control" asp-items="ViewBag.userID"></select>
+                <label asp-for="clinicId" class="control-label"></label>
+                <select asp-for="clinicId" class="form-control" asp-items="ViewBag.Clinics">
+                    <option disabled selected>---- Klinik Seçiniz ----</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="doctorID" class="control-label"></label>
-                <select asp-for="doctorID" class ="form-control" asp-items="ViewBag.doctorID"></select>
+                <select asp-for="doctorID" class="form-control" id="doctorId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="appointmentDate" class="control-label"></label>
                 <input asp-for="appointmentDate" class="form-control" />
                 <span asp-validation-for="appointmentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="isBooked" /> @Html.DisplayNameFor(model => model.isBooked)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -42,5 +39,32 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            GetDoctorsByClinicId();
+        });
+
+        $("#clinicId").change(function () {
+            GetDoctorsByClinicId();
+        });
+
+        var GetDoctorsByClinicId = function () {
+            $.ajax({
+                url: '@Url.Action("GetDoctorsByClinicId","Appointments")',
+                type: 'GET',
+                data: {
+                    clinicId: $('#clinicId').val()
+                },
+                success: function (data) {
+                    $('#doctorId').empty(); // Clear existing options
+                    $(data).each(function (index, item) {
+                        $('#doctorId').append('<option value="' + item.doctorID + '">' + item.doctorName + '</option>');
+                    });
+                }
+            });
+        };
+    </script>
 }

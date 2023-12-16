@@ -49,8 +49,7 @@ namespace WebApplication7.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["doctorID"] = new SelectList(_context.Doctors, "doctorId", "firstName");
-            ViewData["userID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName");
             return View();
         }
 
@@ -59,17 +58,27 @@ namespace WebApplication7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked,clinicId")] Appointment appointment)
         {
+            appointment.isBooked = false;
+
             if (ModelState.IsValid)
             {
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["doctorID"] = new SelectList(_context.Doctors, "doctorId", "firstName", appointment.doctorID);
-            ViewData["userID"] = new SelectList(_context.Users, "Id", "Id", appointment.userID);
+
+            // Klinik değiştikçe doktor listesini güncelle
+            //ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName", appointment.clinicId);
+            //ViewData["Doctors"] = new SelectList(_context.Doctors.Where(d => d.clinicId == appointment.clinicId), "doctorId", "firstName", appointment.doctorID);
+
             return View(appointment);
+        }
+
+        public JsonResult GetDoctorsByClinicId(int clinicId)
+        {
+            return Json(_context.Doctors.Where(x =>x.clinicId==clinicId).ToList());
         }
 
         // GET: Appointments/Edit/5
