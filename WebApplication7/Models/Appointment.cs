@@ -19,7 +19,7 @@ namespace WebApplication7.Models
 
         public Doctor? doctor { get; set; }
 
-        public int clinicId { get; set; }
+        //public int clinicId { get; set; }
 
         public DateTime appointmentDate { get; set; }
 

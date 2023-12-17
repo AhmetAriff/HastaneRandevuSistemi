@@ -15,8 +15,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="clinicId" class="control-label"></label>
-                <select asp-for="clinicId" id="clinicId" class="form-control" asp-items="ViewBag.Clinics">
+                <label class="control-label"></label>
+                <select  id="clinicId" class="form-control" asp-items="ViewBag.Clinics">
                     <option disabled selected>---- Klinik Seçiniz ----</option>
                 </select>
             </div class="form-group">
