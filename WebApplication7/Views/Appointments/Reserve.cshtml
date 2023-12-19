@@ -1,0 +1,101 @@
+﻿@model WebApplication7.Models.Appointment
+
+@{
+    ViewData["Title"] = "Reserve";
+}
+
+<h1>Reserve</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Reserve">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="appointmentID" />
+            <div class="form-group">
+                <label  class="control-label">Klinik</label>
+                <select id="clinicId" class="form-control" asp-items="ViewBag.Clinics">
+                    <option disabled selected>---- Klinik Seçiniz ----</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="doctorID" class="control-label"></label>
+                <select asp-for="doctorID" class="form-select" id="doctorId"></select>
+            </div>
+            <div class="form-group">
+                <label  class="control-label"></label>
+                <select  class="form-select" id="appointmentId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="isBooked" class="control-label"></label>
+                <input asp-for="isBooked" class="form-control" />
+                <span asp-validation-for="isBooked" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            GetDoctorsByClinicId();
+
+            $("#clinicId").change(function () {
+                GetDoctorsByClinicId();
+            });
+        });
+
+        var GetDoctorsByClinicId = function () {
+            $.ajax({
+                url: '@Url.Action("GetDoctorsByClinicId", "Appointments")',
+                type: 'GET',
+                data: {
+                    clinicId: $('#clinicId').val()
+                },
+                success: function (data) {
+                    $('#doctorId').empty(); // Önce mevcut seçenekleri temizle
+                    $(data).each(function (index, item) {
+                        $('#doctorId').append('<option value="' + item.doctorId + '">' + item.firstName + " " + item.lastName + '</option>');
+                    });
+                    if (data.length > 0) {
+                        $('#doctorId').val(data[0].doctorId);
+                    }
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            GetAppointmentsByClinicId();
+
+            $("#doctorId").change(function () {
+                GetAppointmentsByClinicId();
+            });
+        });
+
+        var GetAppointmentsByClinicId = function () {
+            $.ajax({
+                url: '@Url.Action("GetAppointmentsByDoctorId", "Appointments")',
+                type: 'GET',
+                data: {
+                    doctorId: $('#doctorId').val()
+                },
+                success: function (data) {
+                    $('#appointmentId').empty(); // Önce mevcut seçenekleri temizle
+                    $(data).each(function (index, item) {
+                        $('#appointmentId').append('<option value="' + item.appointmentId + '">' + item.appointmentDate + " " + item.appointmentDate + '</option>');
+                    });
+                }
+            });
+        };
+    </script>
+}

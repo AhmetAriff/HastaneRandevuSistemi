@@ -14,7 +14,7 @@ namespace WebApplication7.Controllers
         {
             _logger = logger;
         }
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult Index()
         {
             return View();

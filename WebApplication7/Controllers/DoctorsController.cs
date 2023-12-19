@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Doctors/Create
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             ViewData["clinicId"] = new SelectList(_context.Clinics, "clinicId", "clinicName");
@@ -57,6 +59,7 @@ namespace WebApplication7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("doctorId,firstName,lastName,clinicId")] Doctor doctor)
         {
             if (ModelState.IsValid)
@@ -70,6 +73,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Doctors/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Doctors == null)
@@ -91,6 +95,7 @@ namespace WebApplication7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("doctorId,firstName,lastName,clinicId")] Doctor doctor)
         {
             if (id != doctor.doctorId)
@@ -123,6 +128,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Doctors/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Doctors == null)
@@ -144,6 +150,7 @@ namespace WebApplication7.Controllers
         // POST: Doctors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Doctors == null)

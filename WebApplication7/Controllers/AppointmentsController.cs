@@ -135,6 +135,36 @@ namespace WebApplication7.Controllers
             ViewData["userID"] = new SelectList(_context.Users, "Id", "Id", appointment.userID);
             return View(appointment);
         }
+        public JsonResult GetAppointmentsByDoctorId(int doctorId)
+        {
+            return Json(_context.Appointments.Where(x => x.doctorID == doctorId).ToList());
+        }
+
+        public IActionResult Reserve()
+        {
+            ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reserve([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked,clinicId")] Appointment appointment)
+        {
+            appointment.isBooked = false;
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(appointment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Klinik değiştikçe doktor listesini güncelle
+            //ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName", appointment.clinicId);
+            //ViewData["Doctors"] = new SelectList(_context.Doctors.Where(d => d.clinicId == appointment.clinicId), "doctorId", "firstName", appointment.doctorID);
+
+            return View(appointment);
+        }
 
         // GET: Appointments/Delete/5
         public async Task<IActionResult> Delete(int? id)

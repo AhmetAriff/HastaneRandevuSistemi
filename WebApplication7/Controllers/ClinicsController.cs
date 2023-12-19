@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Clinics/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +58,7 @@ namespace WebApplication7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("clinicId,clinicName")] Clinic clinic)
         {
             if (ModelState.IsValid)
@@ -68,6 +71,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Clinics/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Clinics == null)
@@ -88,6 +92,7 @@ namespace WebApplication7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("clinicId,clinicName")] Clinic clinic)
         {
             if (id != clinic.clinicId)
@@ -119,6 +124,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Clinics/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Clinics == null)
@@ -137,6 +143,7 @@ namespace WebApplication7.Controllers
         }
 
         // POST: Clinics/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
