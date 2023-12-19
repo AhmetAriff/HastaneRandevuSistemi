@@ -21,17 +21,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="doctorID" class="control-label"></label>
-                <select asp-for="doctorID" class="form-select" id="doctorId"></select>
+                <select  asp-for="doctorID" class="form-select" id="doctorId"></select>
             </div>
             <div class="form-group">
-                <label  class="control-label"></label>
-                <select  class="form-select" id="appointmentId"></select>
+                <label asp-for="appointmentDate"  class="control-label">Randevu Tarihi</label>
+                <select asp-for="appointmentDate" class="form-select" id="appointmentDateId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="isBooked" class="control-label"></label>
-                <input asp-for="isBooked" class="form-control" />
-                <span asp-validation-for="isBooked" class="text-danger"></span>
+                <label asp-for="appointmentTime" class="control-label">Randevu Saati</label>
+                <select asp-for="appointmentTime" class="form-select" id="appointmentTimeId"></select>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -74,15 +74,22 @@
             });
         };
 
+        //------------------------------------------------------------
+        //------------------------------------------------------------
+        //------------------------------------------------------------
+        //------------------------------------------------------------
+
         $(document).ready(function () {
-            GetAppointmentsByClinicId();
+            GetAppointmentsByDoctorId();
 
             $("#doctorId").change(function () {
-                GetAppointmentsByClinicId();
+                GetAppointmentsByDoctorId();
             });
         });
 
-        var GetAppointmentsByClinicId = function () {
+        
+
+        var GetAppointmentsByDoctorId = function () {
             $.ajax({
                 url: '@Url.Action("GetAppointmentsByDoctorId", "Appointments")',
                 type: 'GET',
@@ -90,9 +97,45 @@
                     doctorId: $('#doctorId').val()
                 },
                 success: function (data) {
-                    $('#appointmentId').empty(); // Önce mevcut seçenekleri temizle
+                    $('#appointmentDateId').empty(); // Önce mevcut seçenekleri temizle
                     $(data).each(function (index, item) {
-                        $('#appointmentId').append('<option value="' + item.appointmentId + '">' + item.appointmentDate + " " + item.appointmentDate + '</option>');
+                        // var fullDate = new Date(item.appointmentDate);
+                        // var datePart = fullDate.getFullYear() + '-' + String(fullDate.getMonth() + 1).padStart(2, '0') + '-' + String(fullDate.getDate()).padStart(2, '0');
+                        // $('#appointmentDateId').append('<option value="' + item.appointmentId + '">' + datePart + '</option>');
+                        $('#appointmentDateId').append('<option value="' + item.appointmentId + '">' + item.appointmentDate + '</option>');
+
+                    });
+                }
+            });
+        };
+
+        //------------------------------------------------------------
+        //------------------------------------------------------------
+        //------------------------------------------------------------
+        //------------------------------------------------------------
+
+        $(document).ready(function () {
+            GetAppointmentTimeByDoctorIdAndDate();
+
+            $("#appointmentDateId").change(function () {
+                GetAppointmentTimeByDoctorIdAndDate();
+            });
+        });
+        
+        var GetAppointmentTimeByDoctorIdAndDate = function () {
+            $.ajax({
+                url: '@Url.Action("GetAppointmentTimeByDoctorIdAndDate", "Appointments")',
+                type: 'GET',
+                data: {
+                    doctorId: $('#doctorId').val(),
+                    date : $('#appointmentDateId').val()
+                },
+                success: function (data) {
+                    $('#appointmentTimeId').empty(); // Önce mevcut seçenekleri temizle
+                    $(data).each(function (index, item) {
+                        $(data).each(function (index, item) {
+                            $('#appointmentTimeId').append('<option value="' + item.appointmentId + '">' + item.appointmentTime + '</option>');
+                        });
                     });
                 }
             });

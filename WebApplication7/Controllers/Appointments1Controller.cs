@@ -10,23 +10,23 @@ using WebApplication7.Models;
 
 namespace WebApplication7.Controllers
 {
-    public class AppointmentsController : Controller
+    public class Appointments1Controller : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AppointmentsController(ApplicationDbContext context)
+        public Appointments1Controller(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Appointments
+        // GET: Appointments1
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Appointments.Include(a => a.doctor).Include(a => a.user);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Appointments/Details/5
+        // GET: Appointments1/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Appointments == null)
@@ -46,42 +46,33 @@ namespace WebApplication7.Controllers
             return View(appointment);
         }
 
-        // GET: Appointments/Create
+        // GET: Appointments1/Create
         public IActionResult Create()
         {
-            ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName");
+            ViewData["doctorID"] = new SelectList(_context.Doctors, "doctorId", "firstName");
+            ViewData["userID"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Appointments/Create
+        // POST: Appointments1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked,clinicId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("appointmentID,userID,doctorID,appointmentDate,appointmentTime,isBooked")] Appointment appointment)
         {
-            appointment.isBooked = false;
-
             if (ModelState.IsValid)
             {
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            // Klinik değiştikçe doktor listesini güncelle
-            //ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName", appointment.clinicId);
-            //ViewData["Doctors"] = new SelectList(_context.Doctors.Where(d => d.clinicId == appointment.clinicId), "doctorId", "firstName", appointment.doctorID);
-
+            ViewData["doctorID"] = new SelectList(_context.Doctors, "doctorId", "firstName", appointment.doctorID);
+            ViewData["userID"] = new SelectList(_context.Users, "Id", "Id", appointment.userID);
             return View(appointment);
         }
 
-        public JsonResult GetDoctorsByClinicId(int clinicId)
-        {
-            return Json(_context.Doctors.Where(x =>x.clinicId==clinicId).ToList());
-        }
-
-        // GET: Appointments/Edit/5
+        // GET: Appointments1/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Appointments == null)
@@ -99,12 +90,12 @@ namespace WebApplication7.Controllers
             return View(appointment);
         }
 
-        // POST: Appointments/Edit/5
+        // POST: Appointments1/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("appointmentID,userID,doctorID,appointmentDate,isBooked")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("appointmentID,userID,doctorID,appointmentDate,appointmentTime,isBooked")] Appointment appointment)
         {
             if (id != appointment.appointmentID)
             {
@@ -135,44 +126,8 @@ namespace WebApplication7.Controllers
             ViewData["userID"] = new SelectList(_context.Users, "Id", "Id", appointment.userID);
             return View(appointment);
         }
-        public JsonResult GetAppointmentsByDoctorId(int doctorId)
-        {
-            return Json(_context.Appointments.Where(x => x.doctorID == doctorId).ToList());
-        }
 
-        public JsonResult GetAppointmentTimeByDoctorIdAndDate(int doctorId, string date)
-        {
-            DateTime appointmentDate = DateTime.Parse(date);
-            return Json(_context.Appointments.Where(x => x.doctorID == doctorId && x.appointmentDate.Date == appointmentDate).ToList());
-        }
-
-        public IActionResult Reserve()
-        {
-            ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reserve([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked,clinicId")] Appointment appointment)
-        {
-            appointment.isBooked = false;
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(appointment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            // Klinik değiştikçe doktor listesini güncelle
-            //ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName", appointment.clinicId);
-            //ViewData["Doctors"] = new SelectList(_context.Doctors.Where(d => d.clinicId == appointment.clinicId), "doctorId", "firstName", appointment.doctorID);
-
-            return View(appointment);
-        }
-
-        // GET: Appointments/Delete/5
+        // GET: Appointments1/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Appointments == null)
@@ -192,7 +147,7 @@ namespace WebApplication7.Controllers
             return View(appointment);
         }
 
-        // POST: Appointments/Delete/5
+        // POST: Appointments1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
