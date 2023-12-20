@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication7.Data;
 using WebApplication7.Models;
+using WebApplication7.Models.DTO;
 
 namespace WebApplication7.Controllers
 {
@@ -14,9 +16,12 @@ namespace WebApplication7.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public AppointmentsController(ApplicationDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+
+        public AppointmentsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Appointments
@@ -148,13 +153,18 @@ namespace WebApplication7.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reserve([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked,clinicId")] Appointment appointment)
+        public async Task<IActionResult> Reserve([Bind("doctorId,appointmentDate")] AppointmentDto appointment)
         {
-            appointment.isBooked = false;
+            //appointment için dto olsa iyi olur
 
             if (ModelState.IsValid)
             {
-                _context.Add(appointment);
+                Appointment userAppointment = _context.Appointments.Where(x => x.doctorID == appointment.doctorId && x.appointmentDate == appointment.appointmentDate).FirstOrDefault();
+
+                if(userAppointment != null) {
+                    userAppointment.isBooked = true;
+                    userAppointment.userID = _userManager.GetUserId(User);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
