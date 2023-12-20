@@ -1,31 +1,18 @@
 ﻿@model IEnumerable<WebApplication7.Models.Appointment>
 
-@{
-    ViewData["Title"] = "Index";
-}
+    <h1>Randevularım</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.user)
+                @Html.DisplayNameFor(model => model.doctor.clinic)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.doctor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.appointmentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.appointmentTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isBooked)
             </th>
             <th></th>
         </tr>
@@ -34,19 +21,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.user.Id)
+                    @Html.DisplayFor(modelItem => item.doctor.clinic.clinicName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.doctor.firstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.appointmentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.appointmentTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isBooked)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.appointmentID">Edit</a> |

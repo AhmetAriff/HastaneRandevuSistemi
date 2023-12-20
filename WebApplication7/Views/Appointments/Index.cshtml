@@ -22,9 +22,6 @@
                 @Html.DisplayNameFor(model => model.appointmentDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.appointmentTime)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.isBooked)
             </th>
             <th></th>
@@ -50,23 +47,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.appointmentDate)
             </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.appointmentTime)
-             </td>
             <td>
 
                     @{
                         if(item.isBooked== false)
                         {
-                            <b>rezerve edilmedi</b>
+                            <h5>rezerve edilmedi</h5>
                         }
                         else
                         {
-<<<<<<< HEAD
+
                             <h5>rezerve</h5>
-=======
-                            <b>rezerve</b>
->>>>>>> 108205d5fdf5b6fb1b85c6ac7de65edb7f0034f5
                         }
                     }
             </td>

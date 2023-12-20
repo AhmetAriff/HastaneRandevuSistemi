@@ -21,10 +21,7 @@ namespace WebApplication7.Models
 
         //public int clinicId { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime appointmentDate { get; set; }
-
-        public TimeSpan appointmentTime { get; set; }
 
         public bool? isBooked {  get; set; }
     }

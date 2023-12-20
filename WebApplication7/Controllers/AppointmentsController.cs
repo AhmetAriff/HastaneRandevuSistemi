@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -31,6 +32,19 @@ namespace WebApplication7.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: MyAppointments
+        public async Task<IActionResult> MyAppointments()
+        {
+            string currentUserId = _userManager.GetUserId(User);
+            var applicationDbContext = _context.Appointments
+                .Where(x => x.userID == currentUserId)
+                .Include(a => a.doctor)
+                .ThenInclude(b => b.clinic)
+                .OrderBy(a => a.appointmentDate);
+
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Appointments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -52,6 +66,7 @@ namespace WebApplication7.Controllers
         }
 
         // GET: Appointments/Create
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName");
@@ -63,6 +78,7 @@ namespace WebApplication7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("appointmentID,userID,doctorID,appointmentDate,isBooked,clinicId")] Appointment appointment)
         {
             appointment.isBooked = false;
@@ -83,7 +99,9 @@ namespace WebApplication7.Controllers
 
         public JsonResult GetDoctorsByClinicId(int clinicId)
         {
-            return Json(_context.Doctors.Where(x =>x.clinicId==clinicId).ToList());
+            return Json(_context.Doctors
+                .Where(x =>x.clinicId==clinicId)
+                .ToList());
         }
 
         // GET: Appointments/Edit/5
@@ -142,13 +160,7 @@ namespace WebApplication7.Controllers
         }
         public JsonResult GetAppointmentsByDoctorId(int doctorId)
         {
-            return Json(_context.Appointments.Where(x => x.doctorID == doctorId).ToList());
-        }
-
-        public JsonResult GetAppointmentTimeByDoctorIdAndDate(int doctorId, string date)
-        {
-            DateTime appointmentDate = DateTime.Parse(date);
-            return Json(_context.Appointments.Where(x => x.doctorID == doctorId && x.appointmentDate.Date == appointmentDate).ToList());
+            return Json(_context.Appointments.Where(x => x.doctorID == doctorId && x.isBooked == false).ToList());
         }
 
         public IActionResult Reserve()
@@ -172,14 +184,14 @@ namespace WebApplication7.Controllers
                     userAppointment.userID = _userManager.GetUserId(User);
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyAppointments));
             }
 
             // Klinik değiştikçe doktor listesini güncelle
             //ViewData["Clinics"] = new SelectList(_context.Clinics, "clinicId", "clinicName", appointment.clinicId);
             //ViewData["Doctors"] = new SelectList(_context.Doctors.Where(d => d.clinicId == appointment.clinicId), "doctorId", "firstName", appointment.doctorID);
 
-            return View(appointment);
+            return RedirectToAction(nameof(MyAppointments));
         }
 
         // GET: Appointments/Delete/5
