@@ -30,9 +30,8 @@
                 @Html.DisplayFor(modelItem => item.appointmentDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.appointmentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.appointmentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.appointmentID">Delete</a>
+                 <a asp-action="CancelAppointment" asp-route-id="@item.appointmentID">Delete</a>
             </td>
         </tr>
 }

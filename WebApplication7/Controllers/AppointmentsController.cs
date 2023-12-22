@@ -37,7 +37,7 @@ namespace WebApplication7.Controllers
         {
             string currentUserId = _userManager.GetUserId(User);
             var applicationDbContext = _context.Appointments
-                .Where(x => x.userID == currentUserId)
+                .Where(x => x.userID == currentUserId && x.isBooked == true)
                 .Include(a => a.doctor)
                 .ThenInclude(b => b.clinic)
                 .OrderBy(a => a.appointmentDate);
@@ -231,6 +231,43 @@ namespace WebApplication7.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> CancelAppointment(int? id)
+        {
+            if (id == null || _context.Appointments == null)
+            {
+                return NotFound();
+            }
+
+            var appointment = await _context.Appointments
+                .Include(a => a.doctor)
+                .Include(a => a.user)
+                .FirstOrDefaultAsync(m => m.appointmentID == id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            return View(appointment);
+        }
+
+        [HttpPost, ActionName("CancelAppointment")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CancelAppointmentConfirmed(int id)
+        {
+            if (_context.Appointments == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Appointments'  is null.");
+            }
+            var appointment = await _context.Appointments.FindAsync(id);
+            if (appointment != null)
+            {
+                appointment.isBooked = false;
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(MyAppointments));
         }
 
         private bool AppointmentExists(int id)
