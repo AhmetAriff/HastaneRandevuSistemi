@@ -16,3 +16,125 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Genel Stil */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+h1, h4 {
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Form Stil */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+/* Validation Stil */
+.text-danger {
+    color: #dc3545;
+    font-size: 12px;
+}
+
+/* Geri Dönüş Linki */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+
+.btn-create {
+    background-color: #28a745; /* Yeşil renk tonu */
+    color: #ffffff; /* Beyaz yazı rengi */
+}
+
+    .btn-create:hover {
+        background-color: #218838; /* Hover durumunda biraz daha koyu yeşil */
+    }
+
+.btn-back {
+    background-color: #007bff; /* Mavi renk tonu */
+    color: #ffffff; /* Beyaz yazı rengi */
+}
+
+    .btn-back:hover {
+        background-color: #0056b3; /* Hover durumunda biraz daha koyu mavi */
+    }
+
+/* Genel tablo stillemesi */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    /* Tablo başlığı için stil */
+    .table th {
+        background-color: #f4f4f4;
+        padding: 8px 12px;
+        text-align: left;
+        font-weight: bold;
+        border-bottom: 2px solid #ddd;
+    }
+
+    /* Tablo satırları için stil */
+    .table td {
+        padding: 8px 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Zebra çizgili satırlar için stil */
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+/* Bağlantılar için stil */
+a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+    a:hover {
+        background-color: #e9ecef;
+        text-decoration: none;
+    }
+
+
