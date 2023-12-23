@@ -117,7 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Ad" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="BeniHatırla" xml:space="preserve">
+    <value>Beni hatırla</value>
+  </data>
+  <data name="CikisYap" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Bilgi</value>
+  </data>
+  <data name="DilSecenegi" xml:space="preserve">
+    <value>Dil Secenegi</value>
+  </data>
+  <data name="Doktor" xml:space="preserve">
+    <value>Doktor</value>
+  </data>
+  <data name="DoktorDuzenleme" xml:space="preserve">
+    <value>Doktor Düzenleme</value>
+  </data>
+  <data name="Doktorlar" xml:space="preserve">
+    <value>Doktorlar</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Düzenle</value>
+  </data>
+  <data name="GirişYap" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="KayıtOl" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="Klinik" xml:space="preserve">
+    <value>Klinik</value>
+  </data>
+  <data name="KlinikDuzenleme" xml:space="preserve">
+    <value>Klinik Düzenleme</value>
+  </data>
+  <data name="Klinikler" xml:space="preserve">
+    <value>Klinikler</value>
+  </data>
+  <data name="Merhaba" xml:space="preserve">
+    <value>Merhaba</value>
+  </data>
+  <data name="RandevuAl" xml:space="preserve">
+    <value>Randevu Al</value>
+  </data>
+  <data name="RandevuDuzenleme" xml:space="preserve">
+    <value>Randevu Düzenleme</value>
+  </data>
+  <data name="Randevular" xml:space="preserve">
+    <value>Randevular</value>
+  </data>
+  <data name="Randevularım" xml:space="preserve">
+    <value>Randevularım</value>
+  </data>
+  <data name="RezerveMi" xml:space="preserve">
+    <value>Rezerve Mi</value>
+  </data>
+  <data name="Soyad" xml:space="preserve">
+    <value>Soyad</value>
+  </data>
+  <data name="Tarih" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Hasta</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Hoşgeldiniz efenim</value>
+  </data>
+  <data name="YeniBirKullanıcıOlarakGirisYap" xml:space="preserve">
+    <value>Yeni Bir Kullanıcı Olarak Giris Yap</value>
+  </data>
+  <data name="YeniEkle" xml:space="preserve">
+    <value>Ekle</value>
   </data>
 </root>

@@ -79,6 +79,8 @@ a {
     }
 
 
+
+
 .btn-create {
     background-color: #28a745; /* Yeşil renk tonu */
     color: #ffffff; /* Beyaz yazı rengi */
@@ -95,6 +97,33 @@ a {
 
     .btn-back:hover {
         background-color: #0056b3; /* Hover durumunda biraz daha koyu mavi */
+    }
+
+.btn-edit {
+    background-color: #28a745; /* Yeşil renk tonu */
+    color: #ffffff; /* Beyaz yazı rengi */
+}
+
+    .btn-edit:hover {
+        background-color: #ff6b3d; /* Hover durumunda biraz daha koyu yeşil */
+    }
+
+.btn-details {
+    background-color: #007bff; /* Yeşil renk tonu */
+    color: #ffffff; /* Beyaz yazı rengi */
+}
+
+    .btn-details:hover {
+        background-color: #0056b3; /* Hover durumunda biraz daha koyu yeşil */
+    }
+
+.btn-delete {
+    background-color: #dc3545; /* Yeşil renk tonu */
+    color: #ffffff; /* Beyaz yazı rengi */
+}
+
+    .btn-delete:hover {
+        background-color: #c82333; /* Hover durumunda biraz daha koyu yeşil */
     }
 
 /* Genel tablo stillemesi */

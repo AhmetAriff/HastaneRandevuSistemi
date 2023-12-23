@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@_localization.Getkey("Klinikler").Value</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-create">@_localization.Getkey("YeniEkle").Value</a>
 </p>
 <table class="table">
     <thead>
@@ -25,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.clinicName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.clinicId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.clinicId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.clinicId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.clinicId" class="btn btn-edit">@_localization.Getkey("Edit").Value</a>
+                    <a asp-action="Details" asp-route-id="@item.clinicId" class="btn btn-details">@_localization.Getkey("Details").Value</a>
+                    <a asp-action="Delete" asp-route-id="@item.clinicId" class="btn btn-delete">@_localization.Getkey("Delete").Value</a>
             </td>
         </tr>
 }

@@ -27,13 +27,13 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Doctors" asp-action="Index">Doktor Düzenleme</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Doctors" asp-action="Index">@_localization.Getkey("DoktorDuzenleme").Value</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Clinics" asp-action="Index">Klinik Düzenleme</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Clinics" asp-action="Index">@_localization.Getkey("KlinikDuzenleme").Value</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Randevu Düzenleme</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">@_localization.Getkey("RandevuDuzenleme").Value</a>
                             </li>
                         </ul>
                         <partial name="_LoginPartial" />
@@ -41,7 +41,7 @@
                             <button type="button"
                                     class="btn btn-primary dropdown-toggle"
                                     data-bs-toggle="dropdown">
-                                Localization
+                                @_localization.Getkey("DilSecenegi").Value
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
@@ -74,20 +74,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Reserve">Randevu Al</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Reserve">@_localization.Getkey("RandevuAl").Value</a>
                         </li>
                         <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="MyAppointments">Randevularım</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="MyAppointments">@_localization.Getkey("Randevularım").Value</a>
                         </li>
                     </ul>
                         
                     <partial name="_LoginPartial" />
-
+                    <li>
                         <div class="dropdown">
-                            <button type="button"
+                            <button style="width: 200px" type="button"
                                     class="btn btn-primary dropdown-toggle"
                                     data-bs-toggle="dropdown">
-                                Localization
+                                @_localization.Getkey("DilSecenegi").Value
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
@@ -108,6 +108,7 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
                 </div>
                 }
             </div>
