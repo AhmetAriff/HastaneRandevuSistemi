@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace WebApplication7.Models
 {
@@ -11,6 +13,8 @@ namespace WebApplication7.Models
         [Display(Name = "Klinik")]
         public string clinicName { get; set; }
 
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Doctor>? doctors { get; set; }
     }
 }

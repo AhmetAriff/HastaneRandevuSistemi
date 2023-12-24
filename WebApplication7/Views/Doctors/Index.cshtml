@@ -25,6 +25,11 @@
         </tr>
     </thead>
     <tbody>
+
+        @if (Model == null)
+        {
+            <p>No data available.</p>
+        }
 @foreach (var item in Model) {
         <tr>
             <td>

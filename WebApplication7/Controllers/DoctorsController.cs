@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication7.Data;
 using WebApplication7.Models;
 
@@ -15,16 +17,23 @@ namespace WebApplication7.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        private readonly HttpClient _httpClient;
+
         public DoctorsController(ApplicationDbContext context)
         {
             _context = context;
+            _httpClient = new HttpClient();
         }
 
         // GET: Doctors
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Doctors.Include(d => d.clinic);
-            return View(await applicationDbContext.ToListAsync());
+            List<Doctor> doktorlar = new List<Doctor>();
+
+            var response = await _httpClient.GetAsync("https://localhost:7196/api/DoctorsApi");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            doktorlar = JsonConvert.DeserializeObject<List<Doctor>>(jsonResponse);
+            return View(doktorlar) ;
         }
 
         // GET: Doctors/Details/5
@@ -35,13 +44,11 @@ namespace WebApplication7.Controllers
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors
-                .Include(d => d.clinic)
-                .FirstOrDefaultAsync(m => m.doctorId == id);
-            if (doctor == null)
-            {
-                return NotFound();
-            }
+            Doctor doctor = new Doctor();
+
+            var response = await _httpClient.GetAsync("https://localhost:7196/api/DoctorsApi/"+ id);
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            doctor = JsonConvert.DeserializeObject<Doctor>(jsonResponse);     
 
             return View(doctor);
         }
@@ -157,13 +164,8 @@ namespace WebApplication7.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.Doctors'  is null.");
             }
-            var doctor = await _context.Doctors.FindAsync(id);
-            if (doctor != null)
-            {
-                _context.Doctors.Remove(doctor);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _httpClient.DeleteAsync("https://localhost:7196/api/DoctorsApi/" + id);
             return RedirectToAction(nameof(Index));
         }
 
