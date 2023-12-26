@@ -37,13 +37,24 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+
         $(document).ready(function () {
-            GetDoctorsByClinicId();
+            GetDoctorsAndAppointments();
 
             $("#clinicId").change(function () {
-                GetDoctorsByClinicId();
+                GetDoctorsAndAppointments();
             });
         });
+
+        var GetDoctorsAndAppointments = function () {
+            GetDoctorsByClinicId();
+
+            $("#doctorId").change(function () {
+                GetAppointmentsByDoctorId();
+            });
+
+            GetAppointmentsByDoctorId();
+        };
 
         var GetDoctorsByClinicId = function () {
             $.ajax({
@@ -53,31 +64,17 @@
                     clinicId: $('#clinicId').val()
                 },
                 success: function (data) {
-                    $('#doctorId').empty(); // Önce mevcut seçenekleri temizle
+                    $('#doctorId').empty();
                     $(data).each(function (index, item) {
                         $('#doctorId').append('<option value="' + item.doctorId + '">' + item.firstName + " " + item.lastName + '</option>');
                     });
                     if (data.length > 0) {
                         $('#doctorId').val(data[0].doctorId);
                     }
+                    GetAppointmentsByDoctorId();
                 }
             });
         };
-
-        //------------------------------------------------------------
-        //------------------------------------------------------------
-        //------------------------------------------------------------
-        //------------------------------------------------------------
-
-        $(document).ready(function () {
-            GetAppointmentsByDoctorId();
-
-            $("#doctorId").change(function () {
-                GetAppointmentsByDoctorId();
-            });
-        });
-
-
 
         var GetAppointmentsByDoctorId = function () {
             $.ajax({
@@ -87,13 +84,18 @@
                     doctorId: $('#doctorId').val()
                 },
                 success: function (data) {
-                    $('#appointmentDate').empty(); // Önce mevcut seçenekleri temizle
+                    $('#appointmentDate').empty();
                     $(data).each(function (index, item) {
                         $('#appointmentDate').append('<option value="' + item.appointmentDate + '">' + item.appointmentDate + '</option>');
                     });
+                },
+                error: function (error) {
+                    console.error("An error occurred while fetching appointments: ", error);
+                    // Burada kullanıcıya bir hata mesajı gösterebilirsiniz.
                 }
             });
         };
+
 
     </script>
 }
