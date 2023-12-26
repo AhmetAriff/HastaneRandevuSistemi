@@ -62,9 +62,9 @@
                     }
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.appointmentID" class="btn btn-edit">@_localization.Getkey("Edit").Value</a> 
-                    <a asp-action="Details" asp-route-id="@item.appointmentID" class="btn btn-details">@_localization.Getkey("Details").Value</a> 
-                    <a asp-action="Delete" asp-route-id="@item.appointmentID" class="btn btn-delete">@_localization.Getkey("Delete").Value</a>
+                    <a asp-action="Edit" asp-route-id="@item.appointmentID" class="btn btn-table btn-outline-success">@_localization.Getkey("Edit").Value</a>
+                    <a asp-action="Details" asp-route-id="@item.appointmentID" class="btn btn-table btn-outline-info">@_localization.Getkey("Details").Value</a>
+                    <a asp-action="Delete" asp-route-id="@item.appointmentID" class="btn btn-table btn-outline-danger">@_localization.Getkey("Delete").Value</a>
             </td>
         </tr>
 }

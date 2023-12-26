@@ -147,6 +147,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="GeriDön" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="GirişYap" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="RandevuAl" xml:space="preserve">
     <value>Make an Appointment</value>
+  </data>
+  <data name="RandevuBilgileri" xml:space="preserve">
+    <value>Appointment Information</value>
   </data>
   <data name="RandevuDuzenleme" xml:space="preserve">
     <value>Edit Appointments</value>
@@ -197,5 +203,8 @@
   </data>
   <data name="YeniEkle" xml:space="preserve">
     <value>Create New</value>
+  </data>
+  <data name="İptalEt" xml:space="preserve">
+    <value>Cancel</value>
   </data>
 </root>

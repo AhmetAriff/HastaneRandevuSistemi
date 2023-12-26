@@ -55,6 +55,7 @@ namespace WebApplication7.Controllers
 
             var appointment = await _context.Appointments
                 .Include(a => a.doctor)
+                .ThenInclude(b => b.clinic)
                 .Include(a => a.user)
                 .FirstOrDefaultAsync(m => m.appointmentID == id);
             if (appointment == null)
