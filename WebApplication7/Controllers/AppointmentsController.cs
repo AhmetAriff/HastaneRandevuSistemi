@@ -28,6 +28,7 @@ namespace WebApplication7.Controllers
         // GET: Appointments
         public async Task<IActionResult> Index()
         {
+            appointmentExpiredControl();
             var applicationDbContext = _context.Appointments.Include(a => a.doctor).Include(a => a.user);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -35,6 +36,7 @@ namespace WebApplication7.Controllers
         // GET: MyAppointments
         public async Task<IActionResult> MyAppointments()
         {
+            appointmentExpiredControl();
             string currentUserId = _userManager.GetUserId(User);
             var applicationDbContext = _context.Appointments
                 .Where(x => x.userID == currentUserId && x.isBooked == true)
@@ -174,7 +176,7 @@ namespace WebApplication7.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reserve([Bind("doctorId,appointmentDate")] AppointmentDto appointment)
         {
-            //appointment için dto olsa iyi olur
+            appointmentExpiredControl();
 
             if (ModelState.IsValid)
             {
@@ -274,6 +276,17 @@ namespace WebApplication7.Controllers
         private bool AppointmentExists(int id)
         {
           return (_context.Appointments?.Any(e => e.appointmentID == id)).GetValueOrDefault();
+        }
+
+        private  void appointmentExpiredControl()
+        {
+            var appointments = _context.Appointments
+                .Where(x => x.appointmentDate < DateTime.Now)
+                .ToList();
+
+             _context.Appointments.RemoveRange(appointments);
+
+             _context.SaveChanges();
         }
     }
 }
