@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,9 +72,14 @@ namespace WebApplication7.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(doctor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                string data = JsonConvert.SerializeObject(doctor);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responseMessage = await _httpClient.PostAsync("https://localhost:7196/api/DoctorsApi/", content);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["clinicId"] = new SelectList(_context.Clinics, "clinicId", "clinicName", doctor.clinicId);
             return View(doctor);
