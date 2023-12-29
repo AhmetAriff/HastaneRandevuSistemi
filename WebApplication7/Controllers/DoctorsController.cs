@@ -111,30 +111,16 @@ namespace WebApplication7.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("doctorId,firstName,lastName,clinicId")] Doctor doctor)
         {
-            if (id != doctor.doctorId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
-            {
-                try
+            { 
+                 string data = JsonConvert.SerializeObject(doctor);
+                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                 HttpResponseMessage responseMessage = await _httpClient.PutAsync("https://localhost:7196/api/DoctorsApi/" + id, content);
+
+                if(responseMessage.IsSuccessStatusCode)
                 {
-                    _context.Update(doctor);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DoctorExists(doctor.doctorId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
             ViewData["clinicId"] = new SelectList(_context.Clinics, "clinicId", "clinicName", doctor.clinicId);
             return View(doctor);
