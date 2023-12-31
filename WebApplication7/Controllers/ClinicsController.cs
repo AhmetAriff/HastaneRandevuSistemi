@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplication7.Data;
 using WebApplication7.Models;
 
@@ -14,36 +17,40 @@ namespace WebApplication7.Controllers
     public class ClinicsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly HttpClient _httpClient;
 
         public ClinicsController(ApplicationDbContext context)
         {
             _context = context;
+            _httpClient = new HttpClient();
         }
 
         // GET: Clinics
         public async Task<IActionResult> Index()
         {
-              return _context.Clinics != null ? 
-                          View(await _context.Clinics.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Clinics'  is null.");
+            List<Clinic> klinikler = new List<Clinic>();
+
+            var response = await _httpClient.GetAsync("https://localhost:7196/api/ClinicsApi");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            klinikler = JsonConvert.DeserializeObject<List<Clinic>>(jsonResponse);
+            return View(klinikler);
         }
 
         // GET: Clinics/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Clinics == null)
+            if (id == null || _context.Doctors == null)
             {
                 return NotFound();
             }
 
-            var clinic = await _context.Clinics
-                .FirstOrDefaultAsync(m => m.clinicId == id);
-            if (clinic == null)
-            {
-                return NotFound();
-            }
+            Clinic klinik = new Clinic();
 
-            return View(clinic);
+            var response = await _httpClient.GetAsync("https://localhost:7196/api/ClinicsApi/" + id);
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            klinik = JsonConvert.DeserializeObject<Clinic>(jsonResponse);
+
+            return View(klinik);
         }
 
         // GET: Clinics/Create
@@ -63,9 +70,14 @@ namespace WebApplication7.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clinic);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                string data = JsonConvert.SerializeObject(clinic);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responseMessage = await _httpClient.PostAsync("https://localhost:7196/api/ClinicsAPi/", content);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(clinic);
         }
@@ -95,30 +107,16 @@ namespace WebApplication7.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("clinicId,clinicName")] Clinic clinic)
         {
-            if (id != clinic.clinicId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                string data = JsonConvert.SerializeObject(clinic);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responseMessage = await _httpClient.PutAsync("https://localhost:7196/api/ClinicsAPi/" + id, content);
+
+                if (responseMessage.IsSuccessStatusCode)
                 {
-                    _context.Update(clinic);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClinicExists(clinic.clinicId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
             return View(clinic);
         }
@@ -152,13 +150,8 @@ namespace WebApplication7.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.Clinics'  is null.");
             }
-            var clinic = await _context.Clinics.FindAsync(id);
-            if (clinic != null)
-            {
-                _context.Clinics.Remove(clinic);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _httpClient.DeleteAsync("https://localhost:7196/api/ClinicsApi/" + id);
             return RedirectToAction(nameof(Index));
         }
 
