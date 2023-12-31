@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -6,7 +6,7 @@ html {
   html {
     font-size: 16px;
   }
-}
+}*/
 
 html {
   position: relative;
@@ -17,12 +17,34 @@ body {
   margin-bottom: 60px;
 }
 
+#centeredContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#centeredContentWithShadow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Burada gölgeyi tanımlıyoruz. */
+    padding: 20px; /* İçerikle kenarlık arasında boşluk bırakıyoruz. */
+}
+
+#centeredContent {
+    /* İçerik için ek stil tanımlamaları (varsayılan değerler). */
+}
+
+
+
 /* Genel Stil */
-body {
+/*body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     padding: 20px;
-}
+}*/
 
 h1, h4 {
     color: #333;

@@ -186,6 +186,9 @@
   <data name="RezerveMi" xml:space="preserve">
     <value>Rezerve Mi</value>
   </data>
+  <data name="SilmekEmin" xml:space="preserve">
+    <value>Bunu silmek istediğinizden emin misiniz ?</value>
+  </data>
   <data name="Soyad" xml:space="preserve">
     <value>Soyad</value>
   </data>

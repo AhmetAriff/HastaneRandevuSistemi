@@ -186,6 +186,9 @@
   <data name="RezerveMi" xml:space="preserve">
     <value>isBooked</value>
   </data>
+  <data name="SilmekEmin" xml:space="preserve">
+    <value>Are you sure want to delete this ?</value>
+  </data>
   <data name="Soyad" xml:space="preserve">
     <value>Surname</value>
   </data>
