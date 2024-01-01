@@ -32,8 +32,11 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
 )
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-    
-    
+
+
+builder.Services.AddControllersWithViews();
+
+
 builder.Services.AddControllersWithViews();
 
 #region Localizer
@@ -110,8 +113,8 @@ using (var scope = app.Services.CreateScope())
     var userManager =
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
-    string email = "admin@admin.com";
-    string password = "Test1234,";
+    string email = "b211210078@sakarya.edu.tr";
+    string password = "sau";
     if (await userManager.FindByEmailAsync(email) == null)
     {
         var user = new AppUser();

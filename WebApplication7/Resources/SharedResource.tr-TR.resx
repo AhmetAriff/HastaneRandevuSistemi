@@ -120,6 +120,9 @@
   <data name="Ad" xml:space="preserve">
     <value>Ad</value>
   </data>
+  <data name="ap" xml:space="preserve">
+    <value>Randevu Takibi</value>
+  </data>
   <data name="BeniHatırla" xml:space="preserve">
     <value>Beni hatırla</value>
   </data>
@@ -159,11 +162,17 @@
   <data name="Edit" xml:space="preserve">
     <value>Düzenle</value>
   </data>
+  <data name="Esneklik" xml:space="preserve">
+    <value>Esneklik</value>
+  </data>
   <data name="GeriDön" xml:space="preserve">
     <value>GeriDön</value>
   </data>
   <data name="GirişYap" xml:space="preserve">
     <value>Giriş Yap</value>
+  </data>
+  <data name="Guvenlik" xml:space="preserve">
+    <value>Güvenlik</value>
   </data>
   <data name="KayıtOl" xml:space="preserve">
     <value>Kayıt Ol</value>
@@ -180,8 +189,32 @@
   <data name="Klinikler" xml:space="preserve">
     <value>Klinikler</value>
   </data>
+  <data name="Kolaylık" xml:space="preserve">
+    <value>Kolaylık</value>
+  </data>
   <data name="Merhaba" xml:space="preserve">
     <value>Merhaba</value>
+  </data>
+  <data name="pr1" xml:space="preserve">
+    <value>modern tıbbi hizmetlerin kapınıza gelmesini sağlar. Tek bir tıklamayla doktorlarımızın boş zamanlarını, uzmanlık alanlarını ve hizmet verdikleri poliklinikleri görebilir, kolayca randevu alabilirsiniz.</value>
+  </data>
+  <data name="pr2" xml:space="preserve">
+    <value>Zamanınız değerli. Sistemimizle birkaç adımda randevunuzu alabilirsiniz.</value>
+  </data>
+  <data name="pr3" xml:space="preserve">
+    <value>Kişisel bilgileriniz bizim için çok önemlidir. Tüm verileriniz gizli tutulur ve modern güvenlik protokollerimizle korunur.</value>
+  </data>
+  <data name="pr4" xml:space="preserve">
+    <value>Birden fazla poliklinik, doktor ve tarih seçeneğiyle sizin için en uygun zamanı seçebilirsiniz.</value>
+  </data>
+  <data name="pr5" xml:space="preserve">
+    <value>Alanında uzmanlaşmış doktorlarımız, en son teknoloji ve bilimsel gelişmelerle tedavi yöntemleri sunar. Sağlığınızı bizimle güvende hissedin.</value>
+  </data>
+  <data name="pr6" xml:space="preserve">
+    <value>Randevularınızı kolayca takip edin, değiştirin veya iptal edin. Ayrıca, otomatik hatırlatma mesajları sayesinde hiçbir randevunuzu kaçırmayın.</value>
+  </data>
+  <data name="pr7" xml:space="preserve">
+    <value>Topluma daha iyi hizmet sunmak adına sürekli olarak gelişen ve yenilenen bir anlayışla hareket ediyoruz.</value>
   </data>
   <data name="RandevuAl" xml:space="preserve">
     <value>Randevu Al</value>
@@ -204,6 +237,9 @@
   <data name="SilmekEmin" xml:space="preserve">
     <value>Bunu silmek istediğinizden emin misiniz ?</value>
   </data>
+  <data name="sos" xml:space="preserve">
+    <value>Sosyal Sorumluluk</value>
+  </data>
   <data name="Soyad" xml:space="preserve">
     <value>Soyad</value>
   </data>
@@ -212,6 +248,9 @@
   </data>
   <data name="User" xml:space="preserve">
     <value>Hasta</value>
+  </data>
+  <data name="Uzman" xml:space="preserve">
+    <value>Uzman Doktorlarımız</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Hoşgeldiniz efenim</value>

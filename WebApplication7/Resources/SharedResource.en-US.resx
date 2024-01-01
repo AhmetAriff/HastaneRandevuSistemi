@@ -120,6 +120,9 @@
   <data name="Ad" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="ap" xml:space="preserve">
+    <value>Appointment Management</value>
+  </data>
   <data name="BeniHatırla" xml:space="preserve">
     <value>Remember me</value>
   </data>
@@ -159,11 +162,17 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Esneklik" xml:space="preserve">
+    <value>Flexibility</value>
+  </data>
   <data name="GeriDön" xml:space="preserve">
     <value>Back</value>
   </data>
   <data name="GirişYap" xml:space="preserve">
     <value>Log in</value>
+  </data>
+  <data name="Guvenlik" xml:space="preserve">
+    <value>Security</value>
   </data>
   <data name="KayıtOl" xml:space="preserve">
     <value>Register</value>
@@ -180,8 +189,32 @@
   <data name="Klinikler" xml:space="preserve">
     <value>Clinics</value>
   </data>
+  <data name="Kolaylık" xml:space="preserve">
+    <value>Convenience</value>
+  </data>
   <data name="Merhaba" xml:space="preserve">
     <value>Hello</value>
+  </data>
+  <data name="pr1" xml:space="preserve">
+    <value>Enable modern medical services to come to your doorstep. With just one click, you can see the available times, specializations, and clinics where our doctors provide services, and easily book an appointment.</value>
+  </data>
+  <data name="pr2" xml:space="preserve">
+    <value>Your time is valuable. You can easily schedule your appointment with our system in just a few steps.</value>
+  </data>
+  <data name="pr3" xml:space="preserve">
+    <value>Your personal information is very important to us. All your data is kept confidential and protected by our modern security protocols.</value>
+  </data>
+  <data name="pr4" xml:space="preserve">
+    <value>With multiple clinic options, doctors, and date choices, you can select the most suitable time for you.</value>
+  </data>
+  <data name="pr5" xml:space="preserve">
+    <value>Our specialized doctors offer treatment methods with the latest technology and scientific advancements. Feel safe with us for your health.</value>
+  </data>
+  <data name="pr6" xml:space="preserve">
+    <value>Easily track, modify, or cancel your appointments. Additionally, never miss any of your appointments with our automatic reminder messages.</value>
+  </data>
+  <data name="pr7" xml:space="preserve">
+    <value>We operate with an understanding that constantly evolves and renews itself to better serve the community.</value>
   </data>
   <data name="RandevuAl" xml:space="preserve">
     <value>Make an Appointment</value>
@@ -204,6 +237,9 @@
   <data name="SilmekEmin" xml:space="preserve">
     <value>Are you sure want to delete this ?</value>
   </data>
+  <data name="sos" xml:space="preserve">
+    <value>Social Responsibility</value>
+  </data>
   <data name="Soyad" xml:space="preserve">
     <value>Surname</value>
   </data>
@@ -212,6 +248,9 @@
   </data>
   <data name="User" xml:space="preserve">
     <value>User</value>
+  </data>
+  <data name="Uzman" xml:space="preserve">
+    <value>Our Expert Doctors</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome MR Arif</value>
