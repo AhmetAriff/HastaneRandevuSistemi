@@ -126,6 +126,15 @@
   <data name="CikisYap" xml:space="preserve">
     <value>Çıkış Yap</value>
   </data>
+  <data name="CreateAppo" xml:space="preserve">
+    <value>Randevu Ekle</value>
+  </data>
+  <data name="CreateClinic" xml:space="preserve">
+    <value>Klinik Ekle</value>
+  </data>
+  <data name="CreateDoctor" xml:space="preserve">
+    <value>Doktor Ekle</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
@@ -137,6 +146,9 @@
   </data>
   <data name="Doktor" xml:space="preserve">
     <value>Doktor</value>
+  </data>
+  <data name="DoktorBilgi" xml:space="preserve">
+    <value>Doktor Bilgisi</value>
   </data>
   <data name="DoktorDuzenleme" xml:space="preserve">
     <value>Doktor Düzenleme</value>
@@ -158,6 +170,9 @@
   </data>
   <data name="Klinik" xml:space="preserve">
     <value>Klinik</value>
+  </data>
+  <data name="KlinikBilgileri" xml:space="preserve">
+    <value>Klinik Bilgileri</value>
   </data>
   <data name="KlinikDuzenleme" xml:space="preserve">
     <value>Klinik Düzenleme</value>
@@ -206,6 +221,9 @@
   </data>
   <data name="YeniEkle" xml:space="preserve">
     <value>Ekle</value>
+  </data>
+  <data name="İptalEmin" xml:space="preserve">
+    <value>Randevuyu iptal etmek istiyor musunuz ?</value>
   </data>
   <data name="İptalEt" xml:space="preserve">
     <value>İptal Et</value>

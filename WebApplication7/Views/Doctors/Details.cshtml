@@ -4,10 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="shadow p-3 mb-5 bg-white rounded" id="centeredContent">
 
 <div>
-    <h4>Doctor</h4>
+        <div class="text-center"><h4>@_localization.Getkey("DoktorBilgileri")</h4></div>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -30,7 +31,8 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.doctorId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="text-center">
+    <a asp-action="Edit" asp-route-id="@Model?.doctorId" class="btn btn-success ">Edit</a> 
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
 </div>
