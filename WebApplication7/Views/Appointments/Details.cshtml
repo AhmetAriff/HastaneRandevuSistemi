@@ -36,6 +36,16 @@
         <a asp-action="Edit" asp-route-id="@Model?.appointmentID" class="btn btn-success">Edit</a>
     }    
     
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        @{
+            if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            }
+            else
+            {
+                <a asp-action="MyAppointments" class="btn btn-primary">Back to List</a>
+            }
+        }
+    
 </div>
 </div>
